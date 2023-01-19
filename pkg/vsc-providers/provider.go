@@ -1,13 +1,17 @@
 package providers
 
-import "github.com/EnergoStalin/vsc-app/pkg/vsc-providers/responces"
+import (
+	"context"
+
+	"github.com/EnergoStalin/vsc-app/pkg/vsc-providers/responces"
+)
 
 type SearchProvider interface {
 	GetName() string
-	SearchByInn(inn string) responces.SearchResponce
-	SearchByName(name string) responces.SearchResponce
+	GetUrl() string
+	Search(name string, ctx context.Context) (responces.SearchResponce, error)
 }
 
 var Providers = []SearchProvider{
-	&ZaChestnyiBiznesProvider{},
+	NewZaChestnyiBiznesProvider(),
 }
